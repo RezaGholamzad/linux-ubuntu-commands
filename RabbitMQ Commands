@@ -1,0 +1,55 @@
+Step 1. Import Erlang GPG key:
+wget -O- https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | sudo apt-key add -
+######################################
+Step 2. Add the Erlang Repository:
+echo "deb https://packages.erlang-solutions.com/ubuntu bionic contrib" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+######################################
+Step 3. Install Erlang:
+sudo apt update
+sudo apt -y install erlang
+erl -v
+######################################
+Step 4. Import RabbitMQ GPG key:
+wget -O - "https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc" | sudo apt-key add -
+######################################
+Step 5. Add RabbitMQ repository:
+Create Rabbitmq repository file:
+sudo nano /etc/apt/sources.list.d/bintray.rabbitmq.list
+With below content:
+deb https://dl.bintray.com/rabbitmq-erlang/debian bionic erlang
+deb https://dl.bintray.com/rabbitmq/debian bionic main
+Save and close the file.
+######################################
+Step 6. Update the system package list:
+sudo apt-get update
+######################################
+Step 7. Install RabbitMQ server:
+sudo apt-get install rabbitmq-server
+######################################
+Step 8. Manage RabbitMQ service:
+Check status of service:
+sudo systemctl status rabbitmq-server.service
+Stop the service:
+sudo systemctl stop rabbitmq-server.service
+Start the service:
+sudo systemctl start rabbitmq-server.service
+Restart the service:
+sudo systemctl restart rabbitmq-server.service
+######################################
+Make sure that you have access to the RabbitMQ web console by going to http://
+localhost:15672. If you have problems accessing the
+web console, make sure that you have the Management plugin enabled by running the
+following command:
+sudo rabbitmq-plugins list
+
+If the entire list has the boxes unchecked, then the Management plugin is not
+enabled yet (normally happens with fresh installations). To enable this plugin, you can
+execute the following command:
+sudo rabbitmq-plugins enable rabbitmq_management --online
+
+user : guest
+password : guest
+
+
+
+

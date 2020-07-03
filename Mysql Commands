@@ -1,0 +1,22 @@
+install :
+sudo apt update
+################
+sudo apt install mysql-server
+################
+sudo systemctl status mysql
+################
+Login as root : sudo mysql
+################
+The first one is to change the authentication method from auth_socket to mysql_native_password. You can do that by running the following command:
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'very_strong_password';
+FLUSH PRIVILEGES;
+################
+The second, recommended option is to create a new administrative user with access to all databases:
+GRANT ALL PRIVILEGES ON *.* TO 'administrator'@'localhost' IDENTIFIED BY 'very_strong_password';
+################
+login : 
+user : administrator
+password : root
+################
+In the Database tool intellij window, right click on the data source, choose Properties (Shift+Enter), click on the Advanced tab.
+Set the serverTimezone property to UTC.
